@@ -10,14 +10,18 @@ import java.lang.*;
 public class Main {
 
     //check user input a number integer
-    private static int checkInputInt() {
+    private static int checkInputInt(int min, int max) {
         Scanner in = new Scanner(System.in);
 
         //loop until user input correct
         while (true) {
             try {
-                int result = Integer.parseInt(in.nextLine().trim());
-                return result;
+                int num = Integer.parseInt(in.nextLine().trim());
+                if (min <= num && num <= max){
+                    return num;
+                }else{
+                    System.out.println("Input must lie in the range [" + min + " - " + max + "]");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Please input number");
                 System.out.print("Enter again: ");
@@ -32,7 +36,7 @@ public class Main {
         // ask the user to input every element of the array
         for (int i = 0; i < n; i++) {
             System.out.print("arr[" + i + "]: ");
-            arr[i] = checkInputInt();
+            arr[i] = checkInputInt(Integer.MIN_VALUE, Integer.MAX_VALUE);
         }
         return arr;
     }
@@ -74,8 +78,8 @@ public class Main {
 
     public static void main(String[] args) {
         // ask the user for size of the array
-        System.out.print("Enter the size of the array: ");
-        int n = checkInputInt();
+        System.out.print("Enter the size of the array (positive integer): ");
+        int n = checkInputInt(1, Integer.MAX_VALUE);
 
         //create a new array with size n
         int[] arr = getInputArray(n);

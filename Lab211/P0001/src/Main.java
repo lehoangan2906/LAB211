@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 import java.lang.*;
@@ -29,6 +28,7 @@ public class Main {
     }
 
     // function to create an array base on given size
+    /*
     public static int[] CreateArray(int n) {
         int[] array = new int[n];
         Random rd = new Random();
@@ -39,6 +39,24 @@ public class Main {
 
         return array;
     }
+*/
+    
+    public static int[] createArray(int n, int min, int max){
+        
+        // create a new array with size n
+        int[] array = new int[n];
+        
+        // initialize random variable
+        Random rd = new Random();
+        
+        // create random value elements for the array
+        for (int i = 0; i < n; i++){
+            array[i] = rd.nextInt(max - min) + min;
+        }
+        
+        return array;
+    }
+            
 
     public static void display(int[] array, String msg) {
         System.out.println(msg);
@@ -78,15 +96,20 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
+        
+        // ask the user for the size of the array - positive decimal
+        int n = getInt("Enter the size of the array (positive decimal number): ", "Invalid input", 1, Integer.MAX_VALUE);
 
-        // ask the user to enter the size of the array
-        int n = getInt("Enter the size of the array: ", "Invalid input", 0, Integer.MAX_VALUE);
+        // ask the user to enter the range of the array
+        int l = getInt("Enter the lower bound of the array: ", "Invalid input", Integer.MIN_VALUE, Integer.MAX_VALUE);
 
+        int u = getInt("Enter the upper bound of the array: ", "Invalid input", Integer.MIN_VALUE, Integer.MAX_VALUE);
+        
         // generate a random array with the input size
-        int[] array = CreateArray(n);
+        int[] array = createArray(n, l, u);
 
         // display the array before sorting
-        display(array, "\nUnsorted array: ");
+        display(array, "\nUnsorted array: ");   
 
         // sort the array using bubble sort
         BubbleSort(array);
